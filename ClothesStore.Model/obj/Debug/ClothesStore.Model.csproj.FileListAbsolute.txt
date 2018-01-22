@@ -1,0 +1,10 @@
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\ClothesStore.Model.dll.config
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\ClothesStore.Model.dll
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\ClothesStore.Model.pdb
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\EntityFramework.dll
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\EntityFramework.xml
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\obj\Debug\ClothesStore.Model.csprojResolveAssemblyReference.cache
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\obj\Debug\ClothesStore.Model.dll
+E:\OneDrive\Documents\Visual Studio 2015\Projects\ThucHanhASP.NET\ClothesStore\ClothesStore.Model\obj\Debug\ClothesStore.Model.pdb

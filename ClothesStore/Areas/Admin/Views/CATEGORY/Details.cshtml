@@ -1,0 +1,45 @@
+﻿@model ClothesStore.Models.CATEGORY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CATEGORY</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nameCate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameCate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.coverCate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coverCate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iconCate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iconCate)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.moreCate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCate }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

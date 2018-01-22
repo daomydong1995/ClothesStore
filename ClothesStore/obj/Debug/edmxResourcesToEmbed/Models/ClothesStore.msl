@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ClothesStoreModelStoreContainer" CdmEntityContainer="ClothesStoreEntities">
+    <EntitySetMapping Name="ADMIN">
+      <EntityTypeMapping TypeName="ClothesStoreModel.ADMIN">
+        <MappingFragment StoreEntitySet="ADMIN">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="allowed" ColumnName="allowed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORY">
+      <EntityTypeMapping TypeName="ClothesStoreModel.CATEGORY">
+        <MappingFragment StoreEntitySet="CATEGORY">
+          <ScalarProperty Name="idCate" ColumnName="idCate" />
+          <ScalarProperty Name="nameCate" ColumnName="nameCate" />
+          <ScalarProperty Name="coverCate" ColumnName="coverCate" />
+          <ScalarProperty Name="iconCate" ColumnName="iconCate" />
+          <ScalarProperty Name="moreCate" ColumnName="moreCate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMER">
+      <EntityTypeMapping TypeName="ClothesStoreModel.CUSTOMER">
+        <MappingFragment StoreEntitySet="CUSTOMER">
+          <ScalarProperty Name="idCus" ColumnName="idCus" />
+          <ScalarProperty Name="nameCus" ColumnName="nameCus" />
+          <ScalarProperty Name="emailCus" ColumnName="emailCus" />
+          <ScalarProperty Name="passCus" ColumnName="passCus" />
+          <ScalarProperty Name="AdressCus" ColumnName="AdressCus" />
+          <ScalarProperty Name="phoneCus" ColumnName="phoneCus" />
+          <ScalarProperty Name="avaCus" ColumnName="avaCus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDER">
+      <EntityTypeMapping TypeName="ClothesStoreModel.ORDER">
+        <MappingFragment StoreEntitySet="ORDER">
+          <ScalarProperty Name="idOrd" ColumnName="idOrd" />
+          <ScalarProperty Name="nameOrd" ColumnName="nameOrd" />
+          <ScalarProperty Name="descriptionOrd" ColumnName="descriptionOrd" />
+          <ScalarProperty Name="dateOrded" ColumnName="dateOrded" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="CUSTOMER_idCus" ColumnName="CUSTOMER_idCus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDERDETAILS">
+      <EntityTypeMapping TypeName="ClothesStoreModel.ORDERDETAILS">
+        <MappingFragment StoreEntitySet="ORDERDETAILS">
+          <ScalarProperty Name="idOrdDe" ColumnName="idOrdDe" />
+          <ScalarProperty Name="unitPriceOrdDe" ColumnName="unitPriceOrdDe" />
+          <ScalarProperty Name="ORDER_idOrd" ColumnName="ORDER_idOrd" />
+          <ScalarProperty Name="PRODUCT_idPro" ColumnName="PRODUCT_idPro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PARTNER">
+      <EntityTypeMapping TypeName="ClothesStoreModel.PARTNER">
+        <MappingFragment StoreEntitySet="PARTNER">
+          <ScalarProperty Name="idPart" ColumnName="idPart" />
+          <ScalarProperty Name="namePart" ColumnName="namePart" />
+          <ScalarProperty Name="coverPart" ColumnName="coverPart" />
+          <ScalarProperty Name="linkPart" ColumnName="linkPart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCT">
+      <EntityTypeMapping TypeName="ClothesStoreModel.PRODUCT">
+        <MappingFragment StoreEntitySet="PRODUCT">
+          <ScalarProperty Name="idPro" ColumnName="idPro" />
+          <ScalarProperty Name="namePro" ColumnName="namePro" />
+          <ScalarProperty Name="detailsPro" ColumnName="detailsPro" />
+          <ScalarProperty Name="amountPro" ColumnName="amountPro" />
+          <ScalarProperty Name="coverPro" ColumnName="coverPro" />
+          <ScalarProperty Name="pricePro" ColumnName="pricePro" />
+          <ScalarProperty Name="percentSalePro" ColumnName="percentSalePro" />
+          <ScalarProperty Name="hotProduct" ColumnName="hotProduct" />
+          <ScalarProperty Name="CATEGORY_idCate" ColumnName="CATEGORY_idCate" />
+          <ScalarProperty Name="PARTNER_idPart" ColumnName="PARTNER_idPart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

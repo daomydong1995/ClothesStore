@@ -1,0 +1,41 @@
+﻿@model List<ClothesStore.Models.PRODUCT>
+@{
+    ViewBag.Title = ViewBag.nameCate;
+}
+
+<div class="tab3">
+    @foreach (var item in Model)
+            {
+        <div class="col-md-3 product-men">
+            <div class="men-pro-item simpleCart_shelfItem">
+                <div class="men-thumb-item">
+                    <img src="@item.coverPro" alt="" class="pro-image-front">
+                    <img src="@item.coverPro" alt="" class="pro-image-back">
+                    <div class="men-cart-pro">
+                        <div class="inner-men-cart-pro">
+                            <a href="@Url.Action("Details","HomeProduct",new { id = item.idPro })" class="link-product-add-cart">Quick View</a>
+                        </div>
+                    </div>
+                    <span class="product-new-top">New</span>
+
+                </div>
+                <div class="item-info-product ">
+                    <h4><a href="single.html">@item.namePro</a></h4>
+                    <div class="info-product-price">
+                        <span class="item_price">$ @item.pricePro</span>
+                        <del>$</del>
+                    </div>
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                        <form action="#" method="post">
+                            <fieldset>
+                                <input type="button" name="submit" onclick="AddToCart('@item.idPro')" value="Add to cart" class="button">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ClothesStore.Models.CATEGORY>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách thể loại";
+}
+
+<h2 class="page-header">Danh sách thể loại</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div id="category_area">
+    @{ Html.RenderAction("Getpaging", "CATEGORY", new { page = 1 });}
+</div>
+

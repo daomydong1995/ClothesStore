@@ -1,0 +1,80 @@
+﻿@model List<ClothesStore.Models.CartItem>
+@using ClothesStore.Models
+@{
+    ViewBag.Title = "Order";
+}
+
+<div class="container">
+    <h2 class="text-danger text-center">THÔNG TIN HÀNG HÓA</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        @{
+            double tongtien = 0;
+        }
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductOrder.namePro</td>
+                    <td><img src="@item.ProductOrder.coverPro" width="40" /></td>
+                    <td>@item.Quantity</td>
+                    <td>@item.ProductOrder.amountPro</td>
+                    <td>
+                        @{
+                            double tong = item.Quantity * (double)item.ProductOrder.pricePro;
+                            tongtien = tongtien + tong;
+                        }
+                        @tong
+                    </td>
+                </tr>
+                            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-right">Tổng tiền thanh toán: @tongtien</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h2 class="text-danger text-center">THÔNG TIN ĐẶT HÀNG</h2>
+    @{
+        CUSTOMER kh = (CUSTOMER)Session["taikhoan"];
+    }
+    <table class="table table-bordered">
+        @using (Html.BeginForm())
+        {
+            <tr>
+                <td>Họ tên khách hàng</td>
+                <td>@kh.nameCus</td>
+            </tr>
+            <tr>
+                <td>Địa chỉ</td>
+                <td>@kh.AdressCus</td>
+            </tr>
+            <tr>
+                <td>Điện thoại</td>
+                <td>@kh.phoneCus</td>
+            </tr>
+            <tr>
+                <td>Ngày giao</td>
+                <td><input type="date" name="dateOrded" value="@DateTime.Now.ToShortDateString()" class="form-control" /></td>
+            </tr>
+            <tr>
+                   <td>Chú thích</td>
+                   <td><input type="text" name="descriptionOrd" class="form-control"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Đồng ý đặt hàng" class="btn btn-primary" /></td>
+            </tr>
+        }
+    </table>
+</div>

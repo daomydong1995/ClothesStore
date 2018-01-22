@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<ClothesStore.Models.CATEGORY>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách thể loại";
+}
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().nameCate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().coverCate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().iconCate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().moreCate)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nameCate)
+        </td>
+        <td>
+            <img class="img-thumbnail" style="cursor:pointer" id="img_@item.idCate" src="@item.coverCate" width="50" onclick="selectImage('/ADMIN/CATEGORY/ChangeImage/@item.idCate',this.id)" />
+        </td>
+  
+        <td role="gridcell" style="text-align:center;" title="" aria-describedby="jqgrid_Icon">
+            <i class="fa @item.iconCate" ></i>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moreCate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.idCate }) |
+            @Html.ActionLink("Details", "Details", new { id = item.idCate }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idCate })
+        </td>
+    </tr>
+}
+</table>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("GetPaging", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+    { HttpMethod = "GET", UpdateTargetId = "category_area" }))
+<script>
+    function selectImage(action, id) {
+        var finder = new CKFinder();
+        alert: ("Lỗi cập nhật hình ảnh : ");
+            finder.selectActionFunction = function (fileUrl) {
+                $.ajax({
+                    method: "GET",
+                    url: action,
+                    data: { picture: fileUrl }
+                }).done(function (path) {
+                    if (path != '') {
+                        alert: ("Lỗi cập nhật hình ảnh : " + path);
+
+                    }
+                    else {
+                        alert: ("Lỗi cập nhật hình ảnh : " + path);
+                        $("#"+id).attr("src",fileUrl)
+                    }
+
+                });
+            };
+            finder.popup();
+
+    }
+</script>

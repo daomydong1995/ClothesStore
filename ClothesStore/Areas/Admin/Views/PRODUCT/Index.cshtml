@@ -1,0 +1,267 @@
+﻿@model ClothesStore.Models.PRODUCT
+@{ ViewBag.Title = "Danh sách sản phẩm";}
+
+<h2 class="page-header">Danh sách sản phẩm</h2>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Thêm mới</button>
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.namePro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detailsPro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amountPro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.coverPro)
+        </th>
+        <th>
+            
+            @Html.DisplayNameFor(model => model.pricePro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.percentSalePro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hotProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORY.nameCate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PARTNER.namePart)
+        </th>
+        <th>Công cụ trỉnh sửa</th>
+    </tr>
+    
+    <tbody class="tbody">
+    </tbody>
+</table>
+<ul id="pagination-demo" class="pagination-sm"></ul>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadData();
+    });
+    //load data funtion
+    function loadData(pageIndex) {
+        if (pageIndex == null) pageIndex = 1;
+        $.ajax({
+            url: "/PRODUCT/List",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            data: { page: pageIndex },
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                var data = result.data;
+                $.each(data, function (key, item) {
+                    var ck = '<input type="checkbox" disabled="">';
+                    var l = '/ADMIN/PRODUCT/ChangeImage/' + item.idPro + '';
+                    var img = '<img class="img-thumbnail" style="cursor:pointer" id="img_' + item.idPro + '" src="' + item.coverPro + '" width="50" onclick="selectImage(' + "'" + l + "'" + ',this.id)" />';
+                    if (item.hotProduct == true) {
+                        ck = '<input type="checkbox" checked disabled="">'
+                    }
+                    
+                    html += '<tr>';
+                    html += '<td>' + item.namePro + '</td>';
+                    html += '<td>' + '<textarea disabled>' + item.detailsPro + '</textarea>' + '</td>';
+                    html += '<td>' + item.amountPro + '</td>';
+                    html += '<td>' + img + '</td>';
+                    html += '<td>' + item.pricePro + '</td>';
+                    html += '<td>' + item.percentSalePro + '</td>';
+                    html += '<td>' + ck + '</td>';
+                    html += '<td>' + item.CATEGORY.nameCate + '</td>';
+                    html += '<td>' + item.PARTNER.namePart + '</td>';
+                    html += '<td><a href="#" class="btn btn-warning" onclick="return Delete(' + item.idPro + ')">Xóa</a> | <a href="#" class="btn btn-info" onclick="return GetById(' + item.idPro + ')">Sửa</a></td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+                paging(result.total, function () {
+                    loadData();
+                })
+
+            },
+            error: function (errormessase) {
+                alert(errormessase.responseText);
+            }
+        });
+    }
+
+
+    function Delete(id) {
+
+        var ans = confirm("Bạn có chắc chắn xóa?");
+        if (ans) {
+            $.ajax({
+                url: "/PRODUCT/Delete/" + id,
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                type: "GET",
+                success: function (rerult) {
+                    loadData();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    }
+
+    function GetById(id) {
+        $.ajax({
+            url: "/PRODUCT/Edit/" + id,
+            contentType: "application/json;charset=utf-8",
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                $('#idPro').val(result.idPro);
+                $('#namePro').val(result.namePro);
+                CKEDITOR.instances.detailsPro.setData(result.detailsPro);
+                $('#amountPro').val(result.amountPro);
+                $('#coverPro').val(result.coverPro);
+                $('#pricePro').val(result.pricePro);
+                $('#percentSalePro').val(result.percentSalePro);
+                $('#hotProduct').val(result.hotProduct);
+                $('#CATEGORY_idCate').val(result.CATEGORY_idCate);
+                $('#PARTNER_idPart').val(result.PARTNER_idPart);
+                $('#myModal').modal('show');
+                $('#btnAdd').hide();
+                $('#btnUpdate').show();
+         
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+    function Update() {
+        var text = CKEDITOR.instances['detailsPro'].getData();
+        
+        var Obj = {
+            idPro: $('#idPro').val(),
+            namePro: $('#namePro').val(),
+            detailsPro: text,
+            amountPro: $('#amountPro').val(),
+            coverPro: $('#coverPro').val(),
+            pricePro: $('#pricePro').val(),
+            percentSalePro: $('#percentSalePro').val(),
+            hotProduct: $('#hotProduct').val(),
+            CATEGORY_idCate: $('#CATEGORY_idCate').val(),
+            PARTNER_idPart: $('#PARTNER_idPart').val()
+        };
+        $.ajax({
+            url: "/PRODUCT/Edit/",
+            data: JSON.stringify(Obj),
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (rerult) {
+                //load data
+                loadData();
+                //reset textbox
+                $('#namePro').val(""),
+                $('#detailsPro').val(""),
+                $('#amountPro').val(""),
+                $('#coverPro').val(""),
+                $('#pricePro').val(""),
+                $('#percentSalePro').val(""),
+                $('#hotProduct').val(""),
+                //hide myModal
+                $('#myModal').modal('hide');
+                $('#btnAdd').show();
+                $('#btnUpdate').hide();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+                $('#btnAdd').show();
+                $('#btnUpdate').hide();
+            }
+        });
+    }
+
+        function Add() {
+            //lấy giá trị trong textbox
+            var text = CKEDITOR.instances['detailsPro'].getData();
+            var Obj = {
+                namePro: $('#namePro').val(),
+                detailsPro: text,
+                amountPro: $('#amountPro').val(),
+                coverPro: $('#coverPro').val(),
+                pricePro: $('#pricePro').val(),
+                percentSalePro: $('#percentSalePro').val(),
+                hotProduct: $('#hotProduct').val(),
+                CATEGORY_idCate: $('#CATEGORY_idCate').val(),
+                PARTNER_idPart: $('#PARTNER_idPart').val()
+            };
+            $.ajax({
+                url: "/PRODUCT/Create/",
+                data: JSON.stringify(Obj),
+                contentType: "application/json;charset=utf-8",
+                dataType: 'json',
+                type: "POST",
+                success: function (result) {
+                    //load data
+                    loadData();
+                    //hide myModal
+                    $('#myModal').modal('hide');
+                    $()
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+
+        function selectImage(action, id) {
+            var finder = new CKFinder();
+            alert: ("Lỗi cập nhật hình ảnh : ");
+            finder.selectActionFunction = function (fileUrl) {
+                $.ajax({
+                    method: "GET",
+                    url: action,
+                    data: { picture: fileUrl }
+                }).done(function (path) {
+                    if (path != '') {
+                        alert: ("Lỗi cập nhật hình ảnh : " + path);
+
+                    }
+                    else {
+                        alert: ("Lỗi cập nhật hình ảnh : " + path);
+                        $("#" + id).attr("src", fileUrl)
+                    }
+
+                });
+            };
+            finder.popup();
+        }
+
+        function paging(totalRow, callback) {
+        
+        var totalPage = Math.ceil(totalRow / 5)
+        $('#pagination-demo').twbsPagination({
+            totalPages: totalPage,
+            visiblePages: 6,
+            onPageClick: function (event, page) {
+
+                loadData(page);
+            }
+        });
+    }
+</script>
+<div class="modal fade" id="myModal" role="dialog">
+    
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.Action("pageAction", "PRODUCT")
+            </div>
+        </div>
+    </div>
+</div>

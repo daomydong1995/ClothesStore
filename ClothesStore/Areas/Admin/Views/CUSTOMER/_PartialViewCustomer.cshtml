@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<ClothesStore.Models.CUSTOMER>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách khách hàng";
+}
+<table class="table table-bordered table-hover ">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().nameCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().emailCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().passCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().AdressCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().phoneCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().avaCus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nameCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.passCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdressCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phoneCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.avaCus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idCus }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idCus }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idCus })
+        </td>
+    </tr>
+}
+
+</table>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("GetPaging", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+    { HttpMethod = "GET", UpdateTargetId = "customer_area" }))

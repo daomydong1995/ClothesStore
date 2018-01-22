@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ClothesStore.Models.PARTNER>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách đối tác";
+}
+
+<h2 class="page-header">Danh sách đối tác</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div id="partner_area">
+    @{ Html.RenderAction("Getpaging", "PARTNER", new { page = 1 });}
+</div>
+

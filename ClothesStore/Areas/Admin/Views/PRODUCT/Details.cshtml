@@ -1,0 +1,90 @@
+﻿@model ClothesStore.Models.PRODUCT
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRODUCT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.namePro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.namePro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detailsPro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detailsPro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.amountPro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amountPro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.coverPro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coverPro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pricePro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pricePro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.percentSalePro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.percentSalePro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORY.nameCate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORY.nameCate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PARTNER.namePart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PARTNER.namePart)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idPro }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

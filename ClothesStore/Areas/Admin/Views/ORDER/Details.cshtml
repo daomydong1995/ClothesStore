@@ -1,0 +1,58 @@
+﻿@model ClothesStore.Models.ORDER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ORDER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nameOrd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameOrd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descriptionOrd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descriptionOrd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateOrded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateOrded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTOMER.nameCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUSTOMER.nameCus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idOrd }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

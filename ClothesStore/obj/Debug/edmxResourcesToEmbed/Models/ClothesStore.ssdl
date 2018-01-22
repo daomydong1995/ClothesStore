@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClothesStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADMIN">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" />
+    <Property Name="password" Type="nvarchar(max)" />
+    <Property Name="fullname" Type="nvarchar(max)" />
+    <Property Name="email" Type="nvarchar(max)" />
+    <Property Name="avatar" Type="nvarchar(max)" />
+    <Property Name="isAdmin" Type="int" Nullable="false" />
+    <Property Name="allowed" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="idCate" />
+    </Key>
+    <Property Name="idCate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameCate" Type="nvarchar(max)" />
+    <Property Name="coverCate" Type="nvarchar(max)" />
+    <Property Name="iconCate" Type="nvarchar(max)" />
+    <Property Name="moreCate" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="idCus" />
+    </Key>
+    <Property Name="idCus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameCus" Type="nvarchar(max)" />
+    <Property Name="emailCus" Type="nvarchar(max)" />
+    <Property Name="passCus" Type="nvarchar(max)" />
+    <Property Name="AdressCus" Type="nvarchar(max)" />
+    <Property Name="phoneCus" Type="nvarchar(max)" />
+    <Property Name="avaCus" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ORDER">
+    <Key>
+      <PropertyRef Name="idOrd" />
+    </Key>
+    <Property Name="idOrd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameOrd" Type="nvarchar(max)" />
+    <Property Name="descriptionOrd" Type="nvarchar(max)" />
+    <Property Name="dateOrded" Type="datetime" Nullable="false" />
+    <Property Name="totalPrice" Type="int" />
+    <Property Name="CUSTOMER_idCus" Type="int" />
+  </EntityType>
+  <EntityType Name="ORDERDETAILS">
+    <Key>
+      <PropertyRef Name="idOrdDe" />
+    </Key>
+    <Property Name="idOrdDe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unitPriceOrdDe" Type="int" Nullable="false" />
+    <Property Name="ORDER_idOrd" Type="int" />
+    <Property Name="PRODUCT_idPro" Type="int" />
+  </EntityType>
+  <EntityType Name="PARTNER">
+    <Key>
+      <PropertyRef Name="idPart" />
+    </Key>
+    <Property Name="idPart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="namePart" Type="nvarchar(max)" />
+    <Property Name="coverPart" Type="nvarchar(max)" />
+    <Property Name="linkPart" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="idPro" />
+    </Key>
+    <Property Name="idPro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="namePro" Type="nvarchar(max)" />
+    <Property Name="detailsPro" Type="nvarchar(max)" />
+    <Property Name="amountPro" Type="int" />
+    <Property Name="coverPro" Type="nvarchar(max)" />
+    <Property Name="pricePro" Type="int" />
+    <Property Name="percentSalePro" Type="int" />
+    <Property Name="hotProduct" Type="bit" Nullable="false" />
+    <Property Name="CATEGORY_idCate" Type="int" />
+    <Property Name="PARTNER_idPart" Type="int" />
+  </EntityType>
+  <Association Name="FK_dbo_ORDER_dbo_CUSTOMER_CUSTOMER_idCus">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="idCus" />
+      </Principal>
+      <Dependent Role="ORDER">
+        <PropertyRef Name="CUSTOMER_idCus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ORDERDETAILS_dbo_ORDER_ORDER_idOrd">
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="0..1" />
+    <End Role="ORDERDETAILS" Type="Self.ORDERDETAILS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER">
+        <PropertyRef Name="idOrd" />
+      </Principal>
+      <Dependent Role="ORDERDETAILS">
+        <PropertyRef Name="ORDER_idOrd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ORDERDETAILS_dbo_PRODUCT_PRODUCT_idPro">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <End Role="ORDERDETAILS" Type="Self.ORDERDETAILS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="idPro" />
+      </Principal>
+      <Dependent Role="ORDERDETAILS">
+        <PropertyRef Name="PRODUCT_idPro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PRODUCT_dbo_CATEGORY_CATEGORY_idCate">
+    <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="idCate" />
+      </Principal>
+      <Dependent Role="PRODUCT">
+        <PropertyRef Name="CATEGORY_idCate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PRODUCT_dbo_PARTNER_PARTNER_idPart">
+    <End Role="PARTNER" Type="Self.PARTNER" Multiplicity="0..1" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PARTNER">
+        <PropertyRef Name="idPart" />
+      </Principal>
+      <Dependent Role="PRODUCT">
+        <PropertyRef Name="PARTNER_idPart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClothesStoreModelStoreContainer">
+    <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER" EntityType="Self.ORDER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDERDETAILS" EntityType="Self.ORDERDETAILS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PARTNER" EntityType="Self.PARTNER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_ORDER_dbo_CUSTOMER_CUSTOMER_idCus" Association="Self.FK_dbo_ORDER_dbo_CUSTOMER_CUSTOMER_idCus">
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+      <End Role="ORDER" EntitySet="ORDER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ORDERDETAILS_dbo_ORDER_ORDER_idOrd" Association="Self.FK_dbo_ORDERDETAILS_dbo_ORDER_ORDER_idOrd">
+      <End Role="ORDER" EntitySet="ORDER" />
+      <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ORDERDETAILS_dbo_PRODUCT_PRODUCT_idPro" Association="Self.FK_dbo_ORDERDETAILS_dbo_PRODUCT_PRODUCT_idPro">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PRODUCT_dbo_CATEGORY_CATEGORY_idCate" Association="Self.FK_dbo_PRODUCT_dbo_CATEGORY_CATEGORY_idCate">
+      <End Role="CATEGORY" EntitySet="CATEGORY" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PRODUCT_dbo_PARTNER_PARTNER_idPart" Association="Self.FK_dbo_PRODUCT_dbo_PARTNER_PARTNER_idPart">
+      <End Role="PARTNER" EntitySet="PARTNER" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
